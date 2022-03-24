@@ -44,6 +44,8 @@ class QuakeHeap {
         Node(T1, T2);
     };
 
+    vector< list< Node* > > roots;
+    vector< int > node_counter;
 
  public:
     struct Locator {

@@ -25,7 +25,7 @@
 #include <fstream>
 #include <sstream>
 #include <exception>
-#include "./quake_heap_sol.h"
+#include "./quake_heap.h"
 
 using std::vector;
 using std::cout;
