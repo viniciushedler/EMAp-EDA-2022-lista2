@@ -78,7 +78,16 @@ Prof.\ Jorge Poco\hfill\textbf{Entrega:} \duedate\\
 \end{figure}
 
 
-\textbf{Resposta 1:}
+\paragraph{Resposta 1:} Resposta da questão 1
+
+\begin{figure}[!h]
+  \centering
+    \includegraphics[width=.3\textwidth]{figures/1_1.png}
+    \includegraphics[width=.3\textwidth]{figures/1_2.png}
+    \caption{Resposta 1.1 e 1.2}
+  \label{fig:resp1_1}
+\end{figure}
+
 
 \paragraph{Problema 2.} (8 pontos) Desenhe a árvore binária da \autoref{fig:fig2}(a) com os fios da ordem (\emph{inorder-threads}) adicionados.
 
@@ -92,6 +101,13 @@ Prof.\ Jorge Poco\hfill\textbf{Entrega:} \duedate\\
 
 
 \textbf{Resposta 2:}
+
+\begin{figure}[!h]
+  \centering
+    \includegraphics[width=.3\textwidth]{figures/2.png}
+    \caption{Resposta da questão 2}
+  \label{fig:resp1_1}
+\end{figure}
  
 \paragraph{Problema 3} (15 pontos) Você tem uma árvore binária completa, onde cada nó é rotulado com um letra. (Lembre-se de que uma árvore binária está cheia se cada nó não folha tiver exatamente dois filhos.) Ao longo deste problema, restringimos a atenção às árvores binárias completas.
 
@@ -105,6 +121,40 @@ Prof.\ Jorge Poco\hfill\textbf{Entrega:} \duedate\\
 \end{enumerate}
 
 \textbf{Resposta 3:}
+
+\begin{figure}[!h]
+  \centering
+    \includegraphics[width=.5\textwidth]{figures/3_1.png}
+    \caption{3.1 As árvores apresentadas possuem a mesma sequência postorder, sendo o contraexemplo solicitado}
+  \label{fig:resp1_1}
+\end{figure}
+
+3.2: Com as condições fornecidas é sim possível encontrar uma árvore através da sequência pos order com marcações. Para isto, basta ler a sequência e ir colocando os nós lidos em uma pilha. Quando o nó lido for um nó interno (não folha), antes de adicioná-lo à pilha deve-se transformar o elemento do topo da pilha em filho direito do nó atual e retirá-lo da pilha, e então fazer o mesmo com o novo elemento do topo da pilha porém colocando-o como filho esquerdo do nó atual. Ao final restará apenas o root na pilha, com todos os outros nós conectados e formando a única árvore que contém esta sequência pos order marcada.
+
+Pseudo-código:
+
+Recebe sequência de nodes marcados na variável 'nodeList'
+Inicializa a pilha 'nodeStack'
+Para cada 'node' em 'nodeList':
+    Se 'node' não é folha:
+        Filho à direita de 'node' = nó ao topo de 'nodeList'
+        Remove o nó ao topo de 'nodeStack'
+        Filho à esquerda de 'node' = nó ao topo de 'nodeList'
+        Remove o nó ao topo de 'nodeStack'
+    Adiciona 'node' ao topo de 'nodeStack'
+
+3.3: Vide 3.4
+
+3.4:
+
+\begin{figure}[!h]
+  \centering  
+    \includegraphics[width=.4\textwidth]{figures/3_4.png}
+  \caption{3.4: Árvores distintas com as mesmas sequências in order marcadas}
+  \label{fig:matrix}
+\end{figure}
+
+3.5: Não é possível criar uma árvore cheia com 6 nós, pois cada "nível" terá obrigatoriamente uma quantidade par de nós, independente de quantos nós o nível anterior possuí, uma vez que cada nó de ter 0 ou 2 filhos. O nível 0 é a única exceção tendo apenas o nó raiz, e tornando ímpar a quantidade de qualquer árvore binária cheia.
 
 \paragraph{Problema 4} (15 pontos) São dadas duas matrizes $n \times n$ $A$ e $B$, onde (seguindo a  convenção de C++) as linhas e colunas são indexadas de $0$ a $n-1$. Seu produto $A \cdot B$ é uma  matriz $n \times n$ $C$, onde para $0 \leq i$, $j \leq n-1$, $C[i,j]=\sum_{k=0}^{n-1}A[i,k]\cdot B[k,j]$.
 
@@ -124,6 +174,22 @@ Prof.\ Jorge Poco\hfill\textbf{Entrega:} \duedate\\
 \end{enumerate}
 
 \textbf{Resposta 4:}
+Para a multiplicação de matrizes esparsas não é necessária a multiplicação das matrizes como um todo, mas sim apenas dos elementos não zero, que são minoria.
+são armazenados ponteiros para estes elementos em duas listas para cada matriz: uma para cada dimensão. Assim, tendo as listas de ponteiros para os itens de A e B, pegamos o primeiro nó de A (na imagem é o nó contido em A.row[0]), e verificamos se há algum nó em B cuja linha seja igual à coluna do nó em A. Caso sim, adicionamos em C nas cordenadas rowA e colB, sendo rowA a linha do nó de A e colB a coluna do elemento de B, o produto dos valores nos nós sendo avaliados. Então avançamos para o próximo nó na mesma linha em B, e repetimos o processo de adição, repetindo isto até que o ponteiro para o próximo item na mesma linha em B seja nulo. Quando for, passamos para o próximo elemento na mesma coluna em A e repetimos o processo de adição e iteração sobre B, até que o ponteiro para o próximo item na mesma coluna de A seja nulo. Neste momento, passamos para a próxima coluna de A.
+
+Pseudo código:
+
+Inicializa C como uma matriz nula de tamanho nxn.
+Para cada j<n-1: //representa as colunas de A
+    Pega o nó da coluna j de A, chamaremos de X
+    Pega o nó da linha j de B, chamaramos de Y
+    Enquanto X não for Nulo:
+        i = coordenada da linha de X
+        j* = coordenada da coluna de Y
+        C[i][j*] = X.valor * Y.valor
+        Y = Y.proximoNaLinha
+        Se Y é nulo
+            X = X.proximoNaColuna
 
 \newpage
 \section*{Parte 2 - Tarefa de programação}
@@ -291,9 +357,3 @@ A correção decorre do fato de que os dois indicadores \texttt{ap} e \texttt{bp
 
 
 \end{document}
-
-
-
-
-
-
